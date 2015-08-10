@@ -5,26 +5,13 @@
     </head>
     <body>
 
-        <script>
-            var s = document.createElement('script');
-            s.src = "/static/js/app.js";
-            s.async = true;
-            document.body.appendChild(s);
-        </script>
+        <div id="widget-1">
+            <script src="/static/js/app.js" async></script>
+        </div>
 
-        <script>
-            var s = document.createElement('script');
-            s.src = "/static/js/app.js?lorem=1&ipsum=2&dolor=3";
-            s.async = true;
-            document.body.appendChild(s);
-        </script>
-
-        <script>
-            var s = document.createElement('script');
-            s.src = "/static/js/app.js?lorem=4&ipsum=5&dolor=6";
-            s.async = true;
-            document.body.appendChild(s);
-        </script>
+        <div id="widget-2">
+            <script src="/static/js/app.js" async data-options='{"lorem":"ipsum"}'></script>
+        </div>
 
     </body>
 </html>

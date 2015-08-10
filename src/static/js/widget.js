@@ -12,10 +12,10 @@ var exports = function(element, options) {
 
     // default options
     var opts = {
-        'lorem': 'default-1',
-        'ipsum': 2,
-        'dolor': 3,
-        'sit': 4
+        'lorem': 'lorem',
+        'ipsum': 'ipsum',
+        'dolor': 'dolor',
+        'sit': 'sit'
     };
 
     // custom options

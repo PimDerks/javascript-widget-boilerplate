@@ -42,14 +42,8 @@
 
         _createInstance: function(el){
 
-            // get query string
-            var qs = Utils.getQueryString(el.src),
-                config;
-
-            // create object from qs
-            if(qs){
-                config = Utils.queryStringToObject(qs);
-            }
+            // get config from data-attribute on <script>-tag
+            var config = el.dataset.options || '{}';
 
             // create element
             var node = document.createElement('div');
@@ -61,7 +55,7 @@
             el.parentNode.insertBefore(node, el.nextSibling);
 
             // create instance of widget
-            win._instance.instances.push(new Widget(node, config));
+            win._instance.instances.push(new Widget(node, JSON.parse(config)));
 
         }
 
