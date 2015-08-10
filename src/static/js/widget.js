@@ -1,5 +1,8 @@
 'use strict';
 
+var Utils = require('./utils'),
+    _ = require('./vendor/underscore');
+
 /**
  * Initialize module.
  * @param {element} element - The node (element) to load this module on.
@@ -7,8 +10,23 @@
  */
 var exports = function(element, options) {
 
+    // default options
+    var opts = {
+        'lorem': 'default-1',
+        'ipsum': 2,
+        'dolor': 3,
+        'sit': 4
+    };
+
+    // custom options
+    var options = options || {};
+
+    // merge options
+    this._options = _.extend(opts, options);
+
+    // reference to node
     this._element = element;
-    this._options = options || {};
+
     this._initialize();
 
 };
