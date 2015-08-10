@@ -5,6 +5,8 @@ var gulp = require('gulp'),
 
 // require
 var clean = require('./gulp/gulp.clean'),
+    copy = require('./gulp/gulp.copy'),
+    html = require('./gulp/gulp.html'),
     concat = require('./gulp/gulp.concat'),
     watchWWW = require('./gulp/gulp.watchWWW')(bs),
     sass = require('./gulp/gulp.sass'),
@@ -18,6 +20,11 @@ gulp.task('clean', clean);
 // Javascript tasks
 gulp.task('js-copy', js.copy);
 gulp.task('js-watch', js.watch);
+gulp.task('js-browserify', js.browserify);
+
+// HTML tasks
+gulp.task('html-copy', html.copy);
+gulp.task('html-watch', html.watch);
 
 // SASS tasks
 gulp.task('sass-copy', sass.copy);
@@ -27,22 +34,23 @@ gulp.task('sass-watch', sass.watch);
 gulp.task('www-watch', watchWWW);
 gulp.task('watch', ['js-watch', 'sass-watch', 'html-watch', 'www-watch']);
 
+// Copy
+gulp.task('www-copy', copy.copy);
+
 // Concat shims
 gulp.task('shim', concat.shim);
-
-// Inline assets
-gulp.task('inline', inline);
 
 // Automatically update files in browser
 gulp.task('browser-sync', browserSync);
 
 // Minify CSS, JS and images
-gulp.task('minifyCSS', minify.minifyCSS);
-gulp.task('minifyJS', minify.minifyJS);
+gulp.task('css-minify', minify.minifyCSS);
+gulp.task('js-minify', minify.minifyJS);
+gulp.task('minify', ['css-minify', 'js-minify']);
 
 // Initial
 gulp.task('initial', function() {
-    seq('clean', 'js', 'sass');
+    seq('clean', 'js', 'sass', 'html');
 });
 
 // dev
@@ -50,9 +58,14 @@ gulp.task('dev', function() {
     seq('watch', 'browser-sync');
 });
 
+// build html
+gulp.task('html', function() {
+    seq('html-copy');
+});
+
 // build js
 gulp.task('js', function() {
-    seq('js-copy');
+    seq('js-browserify');
 });
 
 // build sass
@@ -62,7 +75,7 @@ gulp.task('sass', function() {
 
 // build
 gulp.task('build', function() {
-    seq('copy-www-static', 'copy-www-media', 'minify', 'inline', 'amd');
+    seq('www-copy', 'minify');
 });
 
 

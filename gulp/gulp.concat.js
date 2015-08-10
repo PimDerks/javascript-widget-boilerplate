@@ -1,5 +1,6 @@
 var gulp = require('gulp'),
-    concat = require('gulp-concat');
+    concat = require('gulp-concat'),
+    config = require('./gulp.config');
 
 module.exports.shim = function(){
 

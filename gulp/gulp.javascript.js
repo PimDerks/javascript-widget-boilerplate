@@ -1,23 +1,27 @@
 var gulp = require('gulp'),
     rename = require('gulp-rename');
+    browserify = require('browserify'),
+    source = require('vinyl-source-stream'),
+    buffer = require('vinyl-buffer'),
     sourcemaps = require('gulp-sourcemaps'),
-    config = require('./gulp.config'),
-    jshint = require('gulp-jshint'),
-    jscs = require('gulp-jscs');
+    config = require('./gulp.config');
 
-module.exports.copy = function(){
+module.exports.browserify = function(){
 
-    var src = [];
-        src.push(config.roots.src + '/**/*.js');
-        src.push('!' + config.roots.src + '/' + config.paths.modules);
-        src.push('!' + config.roots.src + '/' + config.paths.modules + '/**/*');
-        src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/' + config.paths.shim);
-        src.push('!' + config.roots.src + '/' + config.paths.static + '/' + config.paths.js + '/' + config.paths.shim + '/**/*');
+    var src = config.roots.src + '/' + config.paths.static + '/' + config.paths.js,
+        dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.js;
 
-    var dest = config.roots.www;
+    // set up the browserify instance on a task basis
+    var b = browserify({
+        entries: src + '/widget.js',
+        debug: true
+    });
 
-    // all files in root of /scss/
-    return gulp.src(src)
+    return b.bundle()
+        .pipe(source('widget.js'))
+        .pipe(buffer())
+        .pipe(sourcemaps.init({loadMaps: true}))
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest(dest));
 
 };
@@ -25,6 +29,6 @@ module.exports.copy = function(){
 module.exports.watch = function() {
 
     // Watch js files. Tasks are defined in the main gruntfile.
-    gulp.watch(config.roots.src + '/**/*.js', ['js-copy']);
+    gulp.watch(config.roots.src + '/**/*.js', ['js-browserify']);
 
 };

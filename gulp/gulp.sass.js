@@ -1,15 +1,14 @@
 var gulp = require('gulp'),
     watch = require('gulp-watch'),
     sass = require('gulp-sass'),
-    scsslint = require('gulp-scss-lint'),
     sourcemaps = require('gulp-sourcemaps'),
     autoprefixer = require('gulp-autoprefixer'),
-    config = require('./gulp.config')
+    config = require('./gulp.config');
 
 module.exports.copy = function() {
 
     var src = [];
-    src.push(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/*.scss');
+    src.push(config.roots.src + '/' + config.paths.static + '/' + config.paths.sass + '/widget.scss');
 
     var dest = config.roots.www + '/' + config.paths.static + '/' + config.paths.css;
 

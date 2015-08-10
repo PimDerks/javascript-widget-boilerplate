@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    config = require('./gulp.config'),
     clean = require('gulp-clean');
 
 module.exports = function() {
@@ -6,7 +7,6 @@ module.exports = function() {
     // empty and remove www and tmp directories
     var src = [];
     src.push(config.roots.www);
-    src.push(config.roots.tmp);
     src.push(config.roots.dest);
 
     return gulp.src(src)
