@@ -1,48 +1,43 @@
-(function() {
+'use strict';
 
-    var module = require('./module');
+/**
+ * Initialize module.
+ * @param {element} element - The node (element) to load this module on.
+ * @param {object} options - Options for this instance of this module.
+ */
+var exports = function(element, options) {
 
-    'use strict';
+    this._element = element;
+    this._options = options || {};
+    this._initialize();
+
+};
+
+exports.prototype = {
 
     /**
      * Initialize module.
-     * @param {element} element - The node (element) to load this module on.
-     * @param {object} options - Options for this module.
+     *
+     * @memberof Test
+     * @static
+     * @private
      */
-    var exports = function(element, options) {
+    _initialize: function() {
+        this._element.innerHTML = 'Widget';
+        console.log('Create widget on element', this._element, 'with options', this._options);
+    },
 
-        this._element = element;
-        this._options = options || {};
-        this._initialize();
+    /**
+     * Clean up when unloading this module.
+     *
+     * @memberof Test
+     * @static
+     * @public
+     */
+    unload: function() {
 
-    };
+    }
 
-    exports.prototype = {
+};
 
-        /**
-         * Initialize module.
-         *
-         * @memberof Test
-         * @static
-         * @private
-         */
-        _initialize: function() {
-            console.log('init object with options', this._options, 'on', new Date());
-        },
-
-        /**
-         * Clean up when unloading this module.
-         *
-         * @memberof Test
-         * @static
-         * @public
-         */
-        unload: function() {
-
-        }
-
-    };
-
-    return exports;
-
-}());
+module.exports = exports;
