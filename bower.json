@@ -1,0 +1,20 @@
+{
+  "name": "javascript-widget-boilerplate",
+  "version": "0.0.0",
+  "homepage": "https://github.com/PimDerks/javascript-widget-boilerplate",
+  "authors": [
+    "Pim Derks <info@pimderks.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "cleanslate": "~0.10.1"
+  }
+}
