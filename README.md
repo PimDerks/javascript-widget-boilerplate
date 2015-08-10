@@ -33,7 +33,6 @@ The widget itself will ofcourse work in your browser. For developing a widget yo
 First make sure you've got Ruby and NodeJS installed. Then proceed as follows:
 
 * Install Gulp (`npm install gulp`)
-* Install SCSS_Lint (`gem install scss_lint`)
 * Install all packages defined in package.json (`npm install`)
 * Install all packages defined in bower.json (`bower install`)
 
