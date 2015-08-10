@@ -1,0 +1,8 @@
+.idea/
+node_modules/
+bower_components/
+*.css
+*.log
+dest/
+tmp/
+www/
